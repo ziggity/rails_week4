@@ -29,14 +29,14 @@ Once you complete the requirements for the code review, consider adding other fu
 
 # Planning:
 
-[] Build API for business to showcase in a given area. GET (all and by id), POST, PUT and DELETE
-[] Use Postman for testing API calls
-[] Version the API v1.
+[X] Build API for business to showcase in a given area. GET (all and by id), POST, PUT and DELETE
+[X] Use Postman for testing API calls
+[X] Version the API v1.
 [] Add Random endpoint which returns random data from our db.
 [] Search API method - second API endpoint
 [] Complete testing with request specs.
 [] Randomized data with Faker or your own custom seed code.
-[] A README that thoroughly documents all endpoints, including parameters that can be passed in
+[X] A README that thoroughly documents all endpoints, including parameters that can be passed in
 [] exception handling
 
 
