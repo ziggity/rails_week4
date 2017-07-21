@@ -26,6 +26,18 @@ module Api
       shop.destroy
       render json: {status: 'SUCCESS', message: 'Deleted shop', data:shop}, status: :ok
     end
+
+    def update
+      shop = Shop.find(params[:id])
+      if shop.update_attributes(shop_params)
+        render json: {status: 'SUCCESS', message: 'Updated shop', data:shop}, status: :ok
+      else
+        render json: {status: 'SUCCESS', message: 'Did not update shop', data:shop.errors}, status: :unprocessable_entity
+      end
+    end
+
+
+
       private
 
       def shop_params
