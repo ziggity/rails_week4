@@ -3,7 +3,10 @@ module Api
     class ShopsController < ApplicationController
       def index
         random = params[:random]
-          if params[:random]
+        name = params[:name]
+        if params[:name]
+          shop = Shop.search_by_name(name)
+        elsif params[:random]
             if random == "true"
               shops = Shop.order("RANDOM()").limit(5)
             else

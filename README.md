@@ -32,7 +32,7 @@ Once you complete the requirements for the code review, consider adding other fu
 [X] Build API for business to showcase in a given area. GET (all and by id), POST, PUT and DELETE
 [X] Use Postman for testing API calls
 [X] Version the API v1.
-[] Add Random endpoint which returns random data from our db.
+[X] Add Random endpoint which returns random data from our db.
 [] Search API method - second API endpoint
 [] Complete testing with request specs.
 [] Randomized data with Faker or your own custom seed code.
