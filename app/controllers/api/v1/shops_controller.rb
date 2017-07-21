@@ -20,6 +20,12 @@ module Api
           render json: {status: 'SUCCESS', message: 'Did not save shop', data:shop.errors}, status: :unprocessable_entity
       end
     end
+
+    def destroy
+      shop = Shop.find(params[:id])
+      shop.destroy
+      render json: {status: 'SUCCESS', message: 'Deleted shop', data:shop}, status: :ok
+    end
       private
 
       def shop_params
