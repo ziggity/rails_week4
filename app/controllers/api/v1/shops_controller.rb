@@ -10,6 +10,21 @@ module Api
         shop = Shop.find(params[:id])
         render json: {status: 'SUCCESS', message: 'Loaded shops', data:shop}, status: :ok
       end
+
+      def create
+        shop = Shop.new(shop_params)
+
+        if shop.save
+          render json: {status: 'SUCCESS', message: 'Saved shop', data:shop}, status: :ok
+        else
+          render json: {status: 'SUCCESS', message: 'Did not save shop', data:shop.errors}, status: :unprocessable_entity
+      end
+    end
+      private
+
+      def shop_params
+        params.permit(:title, :body)
+      end
     end
   end
 end
