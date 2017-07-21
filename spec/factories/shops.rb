@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :business do
+  factory :shop do
     title "MyString"
     body "MyText"
   end
