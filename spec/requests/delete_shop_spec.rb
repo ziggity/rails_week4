@@ -4,11 +4,11 @@ require 'rails_helper'
    let!(:shop) { FactoryGirl.create(:shop)}
 
    before do
-     delete '/api/v1/shop/' + shop.id.to_s
+     delete '/api/v1/shops/' + shop.id.to_s
    end
 
    it 'returns the deletion confirmation message' do
-     expect(JSON.parse(response.body)['message']).to eq('Local Business deleted')
+     expect(JSON.parse(response.body)['message']).to eq('Local Shop deleted')
    end
 
    it 'returns a success status' do

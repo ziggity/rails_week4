@@ -2,9 +2,9 @@
 require 'rails_helper'
 
 describe "get all shop route", :type => :request do
-  let!(:shops) { FactoryGirl.create_list(:shop, 20)}
+  let!(:shops) { FactoryGirl.create_list(:shop, 10)}
 
-  before { get '/api/v1/shop'}
+  before { get '/api/v1/shops'}
 
   it 'returns all local shops' do
     expect(JSON.parse(response.body).size).to eq(10)
