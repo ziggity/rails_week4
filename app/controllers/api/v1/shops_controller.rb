@@ -4,12 +4,8 @@ module Api::V1
     def index
       if params[:random] === 'yes'
         @shop = Shop.get_random.as_json(root: true)
-      elsif params[:title]
-        @shop = Shop.search_by_business_name(params[:title]).as_json(root: true)
-      elsif params[:body]
-        @shop = Shop.search_by_zipcode(params[:zip]).as_json(root: true)
-      else
-        @shop = Shop.all.paginate(:page => params[:page], :per_page => 10).as_json(root: true)
+      else params[:title]
+        @shop = Shop.search_by_shop_name(params[:title]).as_json(root: true)
       end
       json_response(@shop)
     end
@@ -28,7 +24,7 @@ module Api::V1
       @shop = Shop.find(params[:id])
       if @shop.update!(shop_params)
         render status: 200, json: {
-          message: "Local Business updated"
+          message: "Local Shop updated"
         }
         end
       end
@@ -37,7 +33,7 @@ module Api::V1
       @shop = Shop.find(params[:id])
       if @shop.destroy!
         render status: 200, json: {
-          message: "Local Business deleted"
+          message: "Local Shop deleted"
         }
       end
     end
