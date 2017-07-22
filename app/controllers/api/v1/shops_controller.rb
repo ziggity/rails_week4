@@ -1,60 +1,52 @@
-module Api
-  module V1
-    class ShopsController < ApplicationController
-      def index
-        random = params[:random]
-        name = params[:name]
-        if params[:name]
-          shop = Shop.search_by_name(name)
-        elsif params[:random]
-            if random == "true"
-              shops = Shop.order("RANDOM()").limit(5)
-            else
-              shops = Shop.all
-            end
-          else
-            shops = Shop.all
-          end
-        render json: {status: 'SUCCESS', message: 'Random shops', data:shops}, status: :ok
-      end
+module Api::V1
+  class ShopsController < ApplicationController
 
-      def show
-        shop = Shop.find(params[:id])
-        render json: {status: 'SUCCESS', message: 'Loaded shops', data:shop}, status: :ok
+    def index
+      if params[:random] === 'yes'
+        @shop = Shop.get_random.as_json(root: true)
+      elsif params[:title]
+        @shop = Shop.search_by_business_name(params[:title]).as_json(root: true)
+      elsif params[:body]
+        @shop = Shop.search_by_zipcode(params[:zip]).as_json(root: true)
+      else
+        @shop = Shop.all.paginate(:page => params[:page], :per_page => 10).as_json(root: true)
       end
-
-      def create
-        shop = Shop.new(shop_params)
-
-        if shop.save
-          render json: {status: 'SUCCESS', message: 'Saved shop', data:shop}, status: :ok
-        else
-          render json: {status: 'SUCCESS', message: 'Did not save shop', data:shop.errors}, status: :unprocessable_entity
-      end
+      json_response(@shop)
     end
 
-    def destroy
-      shop = Shop.find(params[:id])
-      shop.destroy
-      render json: {status: 'SUCCESS', message: 'Deleted shop', data:shop}, status: :ok
+    def show
+      @shop = Shop.find(params[:id])
+      json_response(@shop)
+    end
+
+    def create
+      @shop = Shop.create!(shop_params)
+      json_response(@shop)
     end
 
     def update
-      shop = Shop.find(params[:id])
-      if shop.update_attributes(shop_params)
-        render json: {status: 'SUCCESS', message: 'Updated shop', data:shop}, status: :ok
-      else
-        render json: {status: 'SUCCESS', message: 'Did not update shop', data:shop.errors}, status: :unprocessable_entity
+      @shop = Shop.find(params[:id])
+      if @shop.update!(shop_params)
+        render status: 200, json: {
+          message: "Local Business updated"
+        }
+        end
+      end
+
+    def destroy
+      @shop = Shop.find(params[:id])
+      if @shop.destroy!
+        render status: 200, json: {
+          message: "Local Business deleted"
+        }
       end
     end
 
 
-
-      private
-
-      def shop_params
-        params.permit(:title, :body)
-      end
+  private
+    def shop_params
+      params.permit(:title,:body)
     end
+
   end
 end

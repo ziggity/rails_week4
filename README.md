@@ -33,29 +33,73 @@ Once you complete the requirements for the code review, consider adding other fu
 [X] Use Postman for testing API calls
 [X] Version the API v1.
 [X] Add Random endpoint which returns random data from our db.
-[] Search API method - second API endpoint
-[] Complete testing with request specs.
-[] Randomized data with Faker or your own custom seed code.
+[X] Search API method - second API endpoint
+[X] Complete testing with request specs.
+[X] Randomized data with Faker or your own custom seed code.
 [X] A README that thoroughly documents all endpoints, including parameters that can be passed in
-[] exception handling
+[X] exception handling
 
 
+## Installation
+------------
 
-------------------------------------------------------------
-* Ruby version
 
-* System dependencies
+ * git clone https://github.com/ziggity/rails_week4
 
-* Configuration
+ ``
+ cd rails_week4
+``
 
-* Database creation
+* You must install gems:
 
-* Database initialization
+``
+ bundle install
+``
 
-* How to run the test suite
+* Start postgres in another terminal tab (Cmd + T):
 
-* Services (job queues, cache servers, search engines, etc.)
+``
+ postgres
+``
 
-* Deployment instructions
+* Create databases:
 
-* ...
+``
+ rails db:create db:migrate db:seed
+
+``
+* Start the webserver:
+
+``
+ rails s
+``
+
+Navigate to `localhost:3000`
+
+# routes:
+
+``
+Get & post:
+http://localhost:3000/api/v1/shops
+``
+``
+Get by ID:
+http://localhost:3000/api/v1/shops/:5
+``
+``
+Patch, delete, put : http://localhost:3000/api/v1/shops/:id
+``
+
+
+## Known Bugs
+none
+
+## Technologies Used
+
+Ruby on Rails
+
+### License
+
+MIT
+
+Copyright (c) 2017 **Zach Beecher**
